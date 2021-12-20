@@ -7,7 +7,7 @@
 
 #import <UIKit/UIKit.h>
 #import "HWEasyUIProxy.h"
-#import "UITableView+HWFastUI.h"
+#import "UITableView+HWEasyUI.h"
 
 @interface HWEasyUIProxy ()
 
