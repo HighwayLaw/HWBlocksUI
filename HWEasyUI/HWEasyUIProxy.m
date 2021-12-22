@@ -25,11 +25,13 @@
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    //required protocol methods
     NSAssert(tableView.cellForRowHandler, @"cellForRowHandler cannot be nil");
     return tableView.cellForRowHandler(tableView, indexPath);
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    //required protocol methods
     NSAssert(tableView.numberOfRowsHandler, @"numberOfRowsHandler cannot be nil");
     return tableView.numberOfRowsHandler(tableView, section);
 }
@@ -46,6 +48,34 @@
         return tableView.heightForRowHandler(tableView, indexPath);
     }
     return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if (tableView.heightForHeaderHandler) {
+        return tableView.heightForHeaderHandler(tableView, section);
+    }
+    return UITableViewAutomaticDimension;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
+    if (tableView.heightForFooterHandler) {
+        return tableView.heightForFooterHandler(tableView, section);
+    }
+    return UITableViewAutomaticDimension;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    if (tableView.viewForHeaderHandler) {
+        return tableView.viewForHeaderHandler(tableView, section);
+    }
+    return nil;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+    if (tableView.viewForFooterHandler) {
+        return tableView.viewForFooterHandler(tableView, section);
+    }
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {

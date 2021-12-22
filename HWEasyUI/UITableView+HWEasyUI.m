@@ -13,7 +13,12 @@ static void *HWEasyUICellForRowHandlerKey = &HWEasyUICellForRowHandlerKey;
 static void *HWEasyUINumberOfRowsHandlerKey = &HWEasyUINumberOfRowsHandlerKey;
 static void *HWEasyUINumberOfSectionsHandlerKey = &HWEasyUINumberOfSectionsHandlerKey;
 static void *HWEasyUIHeightForRowHandlerKey = &HWEasyUIHeightForRowHandlerKey;
+static void *HWEasyUIHeightForHeaderHandlerKey = &HWEasyUIHeightForHeaderHandlerKey;
+static void *HWEasyUIHeightForFooterHandlerKey = &HWEasyUIHeightForFooterHandlerKey;
+static void *HWEasyUIViewForHeaderHandlerKey = &HWEasyUIViewForHeaderHandlerKey;
+static void *HWEasyUIViewForFooterHandlerKey = &HWEasyUIViewForFooterHandlerKey;
 static void *HWEasyUIDidSelectRowHandlerKey = &HWEasyUIDidSelectRowHandlerKey;
+
 
 @implementation UITableView (HWEasyUI)
 
@@ -49,7 +54,7 @@ static void *HWEasyUIDidSelectRowHandlerKey = &HWEasyUIDidSelectRowHandlerKey;
 
 - (void)setNumberOfSectionsHandler:(HWNumberOfSectionsBlock)numberOfSectionsHandler {
     NSAssert(numberOfSectionsHandler, @"numberOfSectionsHandler cannot be nil");
-    [self configDelegate];
+    [self configDataSource];
     objc_setAssociatedObject(self, HWEasyUINumberOfSectionsHandlerKey, numberOfSectionsHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
@@ -57,6 +62,30 @@ static void *HWEasyUIDidSelectRowHandlerKey = &HWEasyUIDidSelectRowHandlerKey;
     NSAssert(heightForRowHandler, @"heightForRowHandler cannot be nil");
     [self configDelegate];
     objc_setAssociatedObject(self, HWEasyUIHeightForRowHandlerKey, heightForRowHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setHeightForHeaderHandler:(HWHeightForHeaderBlock)heightForHeaderHandler {
+    NSAssert(heightForHeaderHandler, @"heightForHeaderHandler cannot be nil");
+    [self configDelegate];
+    objc_setAssociatedObject(self, HWEasyUIHeightForHeaderHandlerKey, heightForHeaderHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setHeightForFooterHandler:(HWHeightForFooterBlock)heightForFooterHandler {
+    NSAssert(heightForFooterHandler, @"heightForFooterHandler cannot be nil");
+    [self configDelegate];
+    objc_setAssociatedObject(self, HWEasyUIHeightForFooterHandlerKey, heightForFooterHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setViewForHeaderHandler:(HWViewForHeaderBlock)viewForHeaderHandler {
+    NSAssert(viewForHeaderHandler, @"viewForHeaderHandler cannot be nil");
+    [self configDelegate];
+    objc_setAssociatedObject(self, HWEasyUIViewForHeaderHandlerKey, viewForHeaderHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (void)setViewForFooterHandler:(HWViewForFooterBlock)viewForFooterHandler {
+    NSAssert(viewForFooterHandler, @"viewForFooterHandler cannot be nil");
+    [self configDelegate];
+    objc_setAssociatedObject(self, HWEasyUIViewForHeaderHandlerKey, viewForFooterHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (void)setDidSelectRowHandler:(HWDidSelectRowBlock)didSelectRowHandler {
@@ -81,6 +110,22 @@ static void *HWEasyUIDidSelectRowHandlerKey = &HWEasyUIDidSelectRowHandlerKey;
 
 - (HWHeightForRowBlock)heightForRowHandler {
     return objc_getAssociatedObject(self, &HWEasyUIHeightForRowHandlerKey);
+}
+
+- (HWHeightForHeaderBlock)heightForHeaderHandler {
+    return objc_getAssociatedObject(self, &HWEasyUIHeightForHeaderHandlerKey);
+}
+
+- (HWHeightForFooterBlock)heightForFooterHandler {
+    return objc_getAssociatedObject(self, &HWEasyUIHeightForFooterHandlerKey);
+}
+
+- (HWViewForHeaderBlock)viewForHeaderHandler {
+    return objc_getAssociatedObject(self, &HWEasyUIViewForHeaderHandlerKey);
+}
+
+- (HWViewForFooterBlock)viewForFooterHandler {
+    return objc_getAssociatedObject(self, &HWEasyUIHeightForFooterHandlerKey);
 }
 
 - (HWDidSelectRowBlock)didSelectRowHandler {
