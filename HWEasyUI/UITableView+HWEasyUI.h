@@ -10,18 +10,18 @@
 NS_ASSUME_NONNULL_BEGIN
 
 //UITableViewDataSource
-typedef UITableViewCell *_Nonnull(^HWCellForRowBlock)(UITableView *tableView, NSIndexPath *indexPath);
-typedef NSInteger(^HWNumberOfRowsBlock)(UITableView *tableView, NSInteger section);
-typedef NSInteger(^HWNumberOfSectionsBlock)(UITableView *tableView);
+typedef UITableViewCell *_Nonnull(^HWCellForRowBlock)(UITableView *__weak weakTableView, NSIndexPath *indexPath);
+typedef NSInteger(^HWNumberOfRowsBlock)(UITableView *__weak weakTableView, NSInteger section);
+typedef NSInteger(^HWNumberOfSectionsBlock)(UITableView *__weak weakTableView);
 
 //UITableViewDelegate
-typedef CGFloat(^HWHeightForRowBlock)(UITableView *tableView, NSIndexPath *indexPath);
-typedef CGFloat(^HWHeightForHeaderBlock)(UITableView *tableView, NSInteger section);
-typedef CGFloat(^HWHeightForFooterBlock)(UITableView *tableView, NSInteger section);
-typedef UIView *_Nonnull(^HWViewForHeaderBlock)(UITableView *tableView, NSInteger section);
-typedef UIView *_Nonnull(^HWViewForFooterBlock)(UITableView *tableView, NSInteger section);
+typedef CGFloat(^HWHeightForRowBlock)(UITableView *__weak weakTableView, NSIndexPath *indexPath);
+typedef CGFloat(^HWHeightForHeaderBlock)(UITableView *__weak weakTableView, NSInteger section);
+typedef CGFloat(^HWHeightForFooterBlock)(UITableView *__weak weakTableView, NSInteger section);
+typedef UIView *_Nonnull(^HWViewForHeaderBlock)(UITableView *__weak weakTableView, NSInteger section);
+typedef UIView *_Nonnull(^HWViewForFooterBlock)(UITableView *__weak weakTableView, NSInteger section);
 
-typedef void(^HWDidSelectRowBlock)(UITableView *tableView, NSIndexPath *indexPath);
+typedef void(^HWDidSelectRowBlock)(UITableView *__weak weakTableView, NSIndexPath *indexPath);
 
 @interface UITableView (HWEasyUI)
 
