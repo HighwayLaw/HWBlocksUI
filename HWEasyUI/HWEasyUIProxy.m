@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "HWEasyUIProxy.h"
 #import "UITableView+HWEasyUI.h"
+#import "UIButton+HWEasyUI.h"
 
 @interface HWEasyUIProxy ()
 
@@ -23,6 +24,19 @@
     });
     return instance;
 }
+
+#pragma mark - UIButton
+
+- (void)clickOnButton:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        if (button.clickHandler) {
+            button.clickHandler();
+        }
+    }
+}
+
+#pragma mark - UITableView
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     //required protocol methods
