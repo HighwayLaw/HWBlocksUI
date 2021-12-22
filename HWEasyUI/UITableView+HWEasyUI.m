@@ -26,14 +26,14 @@ static void *HWEasyUIDidSelectRowHandlerKey = &HWEasyUIDidSelectRowHandlerKey;
 
 - (void)configDelegate {
     HWEasyUIProxy *delegate = [HWEasyUIProxy sharedInstance];
-    if (!self.delegate) {
+    if (self.delegate != delegate) {
         self.delegate = delegate;
     }
 }
 
 - (void)configDataSource {
     HWEasyUIProxy *dataSource = [HWEasyUIProxy sharedInstance];
-    if (!self.dataSource) {
+    if (self.dataSource != dataSource) {
         self.dataSource = dataSource;
     }
 }

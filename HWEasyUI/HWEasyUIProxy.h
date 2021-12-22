@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface HWEasyUIProxy : NSObject <UITableViewDelegate, UITableViewDataSource>
+@interface HWEasyUIProxy : NSObject <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
 + (instancetype)sharedInstance;
 

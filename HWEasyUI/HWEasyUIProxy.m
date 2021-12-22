@@ -9,6 +9,7 @@
 #import "HWEasyUIProxy.h"
 #import "UITableView+HWEasyUI.h"
 #import "UIButton+HWEasyUI.h"
+#import "UITextField+HWEasyUI.h"
 
 @interface HWEasyUIProxy ()
 
@@ -96,6 +97,55 @@
     if (tableView.didSelectRowHandler) {
         tableView.didSelectRowHandler(tableView, indexPath);
     }
+}
+
+#pragma mark - UITextField
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    if (textField.shouldBeginEditingHandler) {
+        return textField.shouldBeginEditingHandler(textField);
+    }
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    if (textField.didBeginEditingHandler) {
+        textField.didBeginEditingHandler(textField);
+    }
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    if (textField.shouldEndEditingHandler) {
+        return textField.shouldEndEditingHandler(textField);
+    }
+    return YES;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    if (textField.didEndEditingHandler) {
+        textField.didEndEditingHandler(textField);
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if (textField.shouldChangeCharactersHandler) {
+        return textField.shouldChangeCharactersHandler(textField, range, string);
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    if (textField.shouldClearHandler) {
+        return textField.shouldClearHandler(textField);
+    }
+    return YES;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    if (textField.shouldReturnHandler) {
+        return textField.shouldReturnHandler(textField);
+    }
+    return YES;
 }
 
 @end
