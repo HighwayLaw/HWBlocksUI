@@ -13,7 +13,10 @@ typedef void(^HWClickActionBlock)(void);
 
 @interface UIButton (HWEasyUI)
 
+//simple method for UIControlEventTouchUpInside
 @property (nonatomic, copy) HWClickActionBlock clickHandler;
+
+- (void)setEventsHandler:(HWClickActionBlock _Nonnull)clickHandler forControlEvents:(UIControlEvents)controlEvents;
 
 @end
 

@@ -13,21 +13,27 @@ static void *HWEasyUIClickHandlerKey = &HWEasyUIClickHandlerKey;
 
 @implementation UIButton (HWEasyUI)
 
+#pragma mark - public methods
+
+- (void)setEventsHandler:(HWClickActionBlock)clickHandler forControlEvents:(UIControlEvents)controlEvents {
+    NSAssert(clickHandler, @"clickHandler cannot be nil");
+    [self configTargetForEvents:controlEvents];
+    objc_setAssociatedObject(self, HWEasyUIClickHandlerKey, clickHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
 #pragma mark - private methods
 
-- (void)configTarget {
+- (void)configTargetForEvents:(UIControlEvents)events {
     HWEasyUIProxy *target = [HWEasyUIProxy sharedInstance];
-    if (![self.allTargets containsObject:target]) {
-        [self addTarget:target action:@selector(clickOnButton:) forControlEvents:UIControlEventTouchUpInside];
+    if (![self.allTargets containsObject:target] && !(self.allControlEvents&events)) {
+        [self addTarget:target action:@selector(clickOnButton:) forControlEvents:events];
     }
 }
 
 #pragma mark - setters
 
-- (void)setClickHandler:(HWClickActionBlock)ClickHandler {
-    NSAssert(ClickHandler, @"ClickHandler cannot be nil");
-    [self configTarget];
-    objc_setAssociatedObject(self, HWEasyUIClickHandlerKey, ClickHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+- (void)setClickHandler:(HWClickActionBlock)clickHandler {
+    [self setEventsHandler:clickHandler forControlEvents:UIControlEventTouchUpInside];
 }
 
 #pragma mark - getters
