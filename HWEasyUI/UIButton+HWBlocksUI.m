@@ -1,30 +1,30 @@
 //
-//  UIButton+HWEasyUI.m
+//  UIButton+HWBlocksUI.m
 //  TestApp
 //
 //  Created by liuhaiwei on 2021/12/22.
 //
 
-#import "UIButton+HWEasyUI.h"
-#import "HWEasyUIProxy.h"
+#import "UIButton+HWBlocksUI.h"
+#import "HWBlocksUIProxy.h"
 #import "objc/runtime.h"
 
-static void *HWEasyUIClickHandlerKey = &HWEasyUIClickHandlerKey;
+static void *HWBlocksUIClickHandlerKey = &HWBlocksUIClickHandlerKey;
 
-@implementation UIButton (HWEasyUI)
+@implementation UIButton (HWBlocksUI)
 
 #pragma mark - public methods
 
 - (void)setEventsHandler:(HWClickActionBlock)clickHandler forControlEvents:(UIControlEvents)controlEvents {
     NSAssert(clickHandler, @"clickHandler cannot be nil");
     [self configTargetForEvents:controlEvents];
-    objc_setAssociatedObject(self, HWEasyUIClickHandlerKey, clickHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, HWBlocksUIClickHandlerKey, clickHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 #pragma mark - private methods
 
 - (void)configTargetForEvents:(UIControlEvents)events {
-    HWEasyUIProxy *target = [HWEasyUIProxy sharedInstance];
+    HWBlocksUIProxy *target = [HWBlocksUIProxy sharedInstance];
     if (![self.allTargets containsObject:target] && !(self.allControlEvents&events)) {
         [self addTarget:target action:@selector(hanldeButtonEvents:) forControlEvents:events];
     }
@@ -39,7 +39,7 @@ static void *HWEasyUIClickHandlerKey = &HWEasyUIClickHandlerKey;
 #pragma mark - getters
 
 - (HWClickActionBlock)clickHandler {
-    return objc_getAssociatedObject(self, &HWEasyUIClickHandlerKey);
+    return objc_getAssociatedObject(self, &HWBlocksUIClickHandlerKey);
 }
 
 @end

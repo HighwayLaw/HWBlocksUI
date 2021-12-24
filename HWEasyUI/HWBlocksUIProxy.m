@@ -6,16 +6,16 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "HWEasyUIProxy.h"
-#import "UITableView+HWEasyUI.h"
-#import "UIButton+HWEasyUI.h"
-#import "UITextField+HWEasyUI.h"
+#import "HWBlocksUIProxy.h"
+#import "UITableView+HWBlocksUI.h"
+#import "UIButton+HWBlocksUI.h"
+#import "UITextField+HWBlocksUI.h"
 
-@interface HWEasyUIProxy ()
+@interface HWBlocksUIProxy ()
 
 @end
 
-@implementation HWEasyUIProxy
+@implementation HWBlocksUIProxy
 
 + (instancetype)sharedInstance {
     static dispatch_once_t once;

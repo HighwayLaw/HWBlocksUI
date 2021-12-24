@@ -1,5 +1,5 @@
 //
-//  UITableView+HWEasyUI.h
+//  UITableView+HWBlocksUI.h
 //  TestApp
 //
 //  Created by liuhaiwei on 2021/12/20.
@@ -23,7 +23,7 @@ typedef UIView *_Nonnull(^HWViewForFooterBlock)(UITableView *__weak tableView, N
 
 typedef void(^HWDidSelectRowBlock)(UITableView *__weak tableView, NSIndexPath *indexPath);
 
-@interface UITableView (HWEasyUI)
+@interface UITableView (HWBlocksUI)
 
 @property (nonatomic, copy) HWCellForRowBlock cellForRowHandler;
 @property (nonatomic, copy) HWNumberOfRowsBlock numberOfRowsHandler;

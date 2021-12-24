@@ -1,5 +1,5 @@
 //
-//  UITextField+HWEasyUI.h
+//  UITextField+HWBlocksUI.h
 //  TestApp
 //
 //  Created by liuhaiwei on 2021/12/22.
@@ -17,7 +17,7 @@ typedef BOOL(^HWShouldChangeCharactersBlock)(UITextField *__weak textField, NSRa
 typedef BOOL(^HWShouldClearBlock)(UITextField *__weak textField);
 typedef BOOL(^HWShouldReturnBlock)(UITextField *__weak textField);
 
-@interface UITextField (HWEasyUI)
+@interface UITextField (HWBlocksUI)
 
 @property (nonatomic, copy) HWShouldBeginEditingBlock shouldBeginEditingHandler;
 @property (nonatomic, copy) HWDidBeginEditingBlock didBeginEditingHandler;

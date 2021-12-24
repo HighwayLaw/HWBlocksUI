@@ -1,5 +1,5 @@
 //
-//  UIButton+HWEasyUI.h
+//  UIButton+HWBlocksUI.h
 //  TestApp
 //
 //  Created by liuhaiwei on 2021/12/22.
@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 typedef void(^HWClickActionBlock)(void);
 
-@interface UIButton (HWEasyUI)
+@interface UIButton (HWBlocksUI)
 
 //simple method for UIControlEventTouchUpInside
 @property (nonatomic, copy) HWClickActionBlock clickHandler;

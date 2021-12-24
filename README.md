@@ -1,4 +1,4 @@
-# HWEasyUI
+# HWBlocksUI
 A set of utilities to make UIKit Easier to write
 
 # 背景
@@ -26,8 +26,8 @@ A set of utilities to make UIKit Easier to write
 - **赋值`Block`回调时，`Xcode`要能自动代码填充，因为手写`Block`入参回参容易出错；**
 - **尽量不使用`method swizzling`等黑魔法，对安全性与稳定性的影响降到最小。**
 
-# HWEasyUI
-基于上述目的，笔者封装了[HWEasyUI](https://github.com/HighwayLaw/HWEasyUI)库，对`UITableView`，`UITextField`，`UIButton`常用UI组件做了Block改造，使用示例如下：
+# HWBlocksUI
+基于上述目的，笔者封装了[HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)库，对`UITableView`，`UITextField`，`UIButton`常用UI组件做了Block改造，使用示例如下：
 
 `UITableView`实现一个简单列表:
 ```swift
@@ -107,18 +107,18 @@ typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
 - (void)setShouldBeginEditingHandler:(HWShouldBeginEditingBlock)shouldBeginEditingHandler {
     NSAssert(shouldBeginEditingHandler, @"shouldBeginEditingHandler cannot be nil");
     [self configDelegate];
-    objc_setAssociatedObject(self, HWEasyUIShouldBeginEditingKey, shouldBeginEditingHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    objc_setAssociatedObject(self, HWBlocksUIShouldBeginEditingKey, shouldBeginEditingHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 - (HWShouldBeginEditingBlock)shouldBeginEditingHandler {
-    return objc_getAssociatedObject(self, &HWEasyUIShouldBeginEditingKey);
+    return objc_getAssociatedObject(self, &HWBlocksUIShouldBeginEditingKey);
 }
 
 ```
 这里`setter`中会同时执行`[self configDelegate]`，接下来会讲到其目的。
 
 ## 配置Delegte
-新增一个类`HWEasyUIProxy`，遵循`UITextFieldDelegate`，在其代理方法中，实际执行的是该对象绑定的`Block`，如果没有找到对应的`Block`，就返回默认值：
+新增一个类`HWBlocksUIProxy`，遵循`UITextFieldDelegate`，在其代理方法中，实际执行的是该对象绑定的`Block`，如果没有找到对应的`Block`，就返回默认值：
 ```swift
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.shouldBeginEditingHandler) {
@@ -127,10 +127,10 @@ typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
     return YES;
 }
 ```
-在上步设置`Block`属性时，会把`Delegate`设置为该`HWEasyUIProxy`：
+在上步设置`Block`属性时，会把`Delegate`设置为该`HWBlocksUIProxy`：
 ```swift
 - (void)configDelegate {
-    HWEasyUIProxy *Delegate = [HWEasyUIProxy sharedInstance];
+    HWBlocksUIProxy *Delegate = [HWBlocksUIProxy sharedInstance];
     if (self.Delegate != Delegate) {
         self.Delegate = Delegate;
     }
@@ -138,7 +138,7 @@ typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
 ```
 
 ## 对调用方隐藏Delegate
-由于在每一次设置`Block`时，都会检查去检查设置`Delegate`，所以达到了对调用方隐藏`Delegate`的目的。考虑到`HWEasyUIProxy`的使用特征和频率，同时由于其不包含实例变量，只用来转发方法，资源占用很小，方便起见设为单例形式。
+由于在每一次设置`Block`时，都会检查去检查设置`Delegate`，所以达到了对调用方隐藏`Delegate`的目的。考虑到`HWBlocksUIProxy`的使用特征和频率，同时由于其不包含实例变量，只用来转发方法，资源占用很小，方便起见设为单例形式。
 
 ## 内存处理
 
@@ -149,6 +149,6 @@ typedef BOOL(^HWShouldChangeCharactersBlock)(UITextField *__weak textField, NSRa
 
 # 总结
 
-[HWEasyUI](https://github.com/HighwayLaw/HWEasyUI)的实现大部分是胶水代码，不过如果能让调用方更方便使用，维护代价更小，那这一切都是值得做的。欢迎各位大佬一起讨论、使用、改进。
+[HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)的实现大部分是胶水代码，不过如果能让调用方更方便使用，维护代价更小，那这一切都是值得做的。欢迎各位大佬一起讨论、使用、改进。
 
 
