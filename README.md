@@ -10,7 +10,7 @@ A set of utilities to make UIKit Easier to write
 ```swift
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)interval repeats:(BOOL)repeats Block:(void (^)(NSTimer *timer))Block API_AVAILABLE(macosx(10.12), ios(10.0), watchos(3.0), tvos(10.0));
 ```
-用来取代之前指定`selector`的方法：
+用来取代之前指定`target+selector`的方法：
 ```swift
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
 ```
@@ -21,7 +21,7 @@ A set of utilities to make UIKit Easier to write
 
 # 优化思路
 鉴于上述分析，对`UITableView`，`UITextField`，`UIButton`等常用的`UIKit`类进行`Block`改写，同时希望做到以下几点：
-- **在`Delegate`的基础上增加对应的`Block`方式，原有`Delegate`方式不受影响，调动方可根据实际场景自行选择合适的回调方式；**
+- **在`Delegate`的基础上增加对应的`Block`方式，原有`Delegate`方式不受影响，调用方可根据实际场景自行选择合适的回调方式；**
 - **`Block`的方法与原`Delegate`方法名字尽量保持一致，降低迁移成本；**
 - **赋值`Block`回调时，`Xcode`要能自动代码填充，因为手写`Block`入参回参容易出错；**
 - **尽量不使用`method swizzling`等黑魔法，对安全性与稳定性的影响降到最小。**
@@ -31,23 +31,23 @@ A set of utilities to make UIKit Easier to write
 
 `UITableView`实现一个简单列表:
 ```swift
-UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
+    UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseId];
     [self.view addSubview:tableView];
 
     NSArray *titles = @[@"北京", @"上海", @"深圳", @"广州", @"成都", @"雄安", @"苏州"];
     
-    tableView.numberOfRowsHandler = ^NSInteger(UITableView *__weak  _Nonnull weakTableView, NSInteger section) {
+    tableView.numberOfRowsHandler = ^NSInteger(UITableView *__weak  _Nonnull tableView, NSInteger section) {
         return titles.count;
     };
     
-    tableView.cellForRowHandler = ^UITableViewCell * _Nonnull(UITableView *__weak  _Nonnull weakTableView, NSIndexPath * _Nonnull indexPath) {
-        UITableViewCell *cell = [weakTableView dequeueReusableCellWithIdentifier:reuseId forIndexPath:indexPath];
+    tableView.cellForRowHandler = ^UITableViewCell * _Nonnull(UITableView *__weak  _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
+        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseId forIndexPath:indexPath];
         cell.textLabel.text = titles[indexPath.row];
         return cell;
     };
     
-    tableView.didSelectRowHandler = ^(UITableView *__weak  _Nonnull weakTableView, NSIndexPath * _Nonnull indexPath) {
+    tableView.didSelectRowHandler = ^(UITableView *__weak  _Nonnull tableView, NSIndexPath * _Nonnull indexPath) {
         NSString *title = titles[indexPath.row];
         NSLog(title);
     };
@@ -55,7 +55,7 @@ UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
 
 `UITextField`实现一个最多允许输入6个字符的输入框：
 ```swift
-UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 30)];
+    UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 30)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
     textField.clearButtonMode = UITextFieldViewModeAlways;
     [self.view addSubview:textField];
@@ -76,7 +76,7 @@ UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, 
 
 `UIButton`，考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setEventsHandler:forControlEvents:`：
 ```swift
-UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
+    UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setFrame:CGRectMake(24, 200, self.view.frame.size.width - 48, 20)];
     [btn setTitle:@"OK" forState:UIControlStateNormal];
     btn.clickHandler = ^{
@@ -138,7 +138,7 @@ typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
 ```
 
 ## 对调用方隐藏Delegate
-由于在每一次设置`Block`时，都会检查去检查设置`Delegate`，所以达到了对调用方隐藏`Delegate`的目的。考虑到`HWBlocksUIProxy`的使用特征和频率，同时由于其不包含实例变量，只用来转发方法，资源占用很小，方便起见设为单例形式。
+由于在每一次设置`Block`时，都会去检查设置`Delegate`，所以达到了对调用方隐藏`Delegate`的目的。考虑到`HWBlocksUIProxy`的使用特征和频率，同时由于其不包含实例变量，只用来转发方法，资源占用很小，方便起见设为单例形式。
 
 ## 内存处理
 
