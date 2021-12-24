@@ -1,6 +1,10 @@
 # HWBlocksUI
 A set of utilities to make UIKit Easier to write
 
+---
+highlight: agate
+---
+
 # 背景
 `UIKit`中的许多常用控件通过`Delegate`方式或者指定`target+selector`来实现事件回调，例如`UITableView`，`UITextField`，`UIButton`等。这种方式的优点是代码规整，在代码量大的时候更容易维护。但是当回调逻辑不是特别复杂时，使用`Block`回调会比`Delegate`或`target+selector`更加有优势，具体体现在：
 - **代码紧凑，无需声明协议，可以将相关代码逻辑集中在一起，降低开发调试成本；**
@@ -87,7 +91,7 @@ A set of utilities to make UIKit Easier to write
 # 实现原理
 
 对`UIKit`进行`Block`改造的核心点在于：
-- 为要改造的`UIKit`类，添加对应的`Block`属性；
+- 为要改造的`UIKit`类，添加每个Delegate方法对应的`Block`属性；
 - 由于无法改造`UIKit`源码，所以仍然需要有一个`Delegate`对象，实现对应的代理方法；
 - `Delegate`对象在执行代理方法时，找到对应的`Block`执行实际回调方法；
 - 对调用方隐藏这个`Delegate`对象；
@@ -95,7 +99,8 @@ A set of utilities to make UIKit Easier to write
 下面以`UITextField`为例看下改造的主要过程：
 
 ## 添加Block属性
-添加对应`category`，通过`runtime`绑定`Block`，这里注意`Block`的命名及参数需要和对应的`Delegate`方法保持一致。
+定义相应`Category`：`UITextField+HWBlocksUI`用来绑定`Block`；梳理`UITextFieldDelegate`的方法，定义对应的`Block`，`Block`属性名采用`Delegate`的方法主体名+`Handler`的形式，入参和回参与`Delegate`方法保持一致，通过`runtime`将该`Block`属性添加到该分类。示例代码如下：
+
 头文件中定义`Block`属性：
 ```swift
 typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
@@ -118,7 +123,7 @@ typedef BOOL(^HWShouldBeginEditingBlock)(UITextField *__weak textField);
 这里`setter`中会同时执行`[self configDelegate]`，接下来会讲到其目的。
 
 ## 配置Delegte
-新增一个类`HWBlocksUIProxy`，遵循`UITextFieldDelegate`，在其代理方法中，实际执行的是该对象绑定的`Block`，如果没有找到对应的`Block`，就返回默认值：
+新增一个类`HWBlocksUIProxy`，遵循`UITextFieldDelegate`，在其代理方法中，实际执行的是该对象绑定的`Block`，如果没有找到对应的`Block`，则返回默认值：
 ```swift
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.shouldBeginEditingHandler) {
@@ -150,5 +155,6 @@ typedef BOOL(^HWShouldChangeCharactersBlock)(UITextField *__weak textField, NSRa
 # 总结
 
 [HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)的实现大部分是胶水代码，不过如果能让调用方更方便使用，维护代价更小，那这一切都是值得做的。欢迎各位大佬一起讨论、使用、改进。
+
 
 
