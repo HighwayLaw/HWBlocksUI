@@ -26,7 +26,7 @@ static void *HWEasyUIClickHandlerKey = &HWEasyUIClickHandlerKey;
 - (void)configTargetForEvents:(UIControlEvents)events {
     HWEasyUIProxy *target = [HWEasyUIProxy sharedInstance];
     if (![self.allTargets containsObject:target] && !(self.allControlEvents&events)) {
-        [self addTarget:target action:@selector(clickOnButton:) forControlEvents:events];
+        [self addTarget:target action:@selector(hanldeButtonEvents:) forControlEvents:events];
     }
 }
 

@@ -28,7 +28,7 @@
 
 #pragma mark - UIButton
 
-- (void)clickOnButton:(id)sender {
+- (void)hanldeButtonEvents:(id)sender {
     if ([sender isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)sender;
         if (button.clickHandler) {
