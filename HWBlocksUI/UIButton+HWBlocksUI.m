@@ -23,7 +23,7 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
 
 #pragma mark - public methods
 
-- (void)setEventsHandler:(HWControlEventsActionBlock)eventsHandler forControlEvents:(UIControlEvents)controlEvents {
+- (void)setHandler:(HWControlEventsActionBlock)eventsHandler forControlEvents:(UIControlEvents)controlEvents {
     NSAssert(eventsHandler, @"clickHandler cannot be nil");
     if (controlEvents & UIControlEventTouchUpInside) {
         objc_setAssociatedObject(self, HWBlocksUIClickHandlerKey, eventsHandler, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
@@ -102,7 +102,7 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
 #pragma mark - setters
 
 - (void)setClickHandler:(HWControlEventsActionBlock)clickHandler {
-    [self setEventsHandler:clickHandler forControlEvents:UIControlEventTouchUpInside];
+    [self setHandler:clickHandler forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)setHandlersDic:(NSMutableDictionary<NSNumber *,HWControlEventsActionBlock> *)handlersDic {

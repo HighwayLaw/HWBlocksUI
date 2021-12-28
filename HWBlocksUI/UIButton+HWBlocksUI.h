@@ -16,7 +16,7 @@ typedef void(^HWControlEventsActionBlock)(void);
 //simple method for UIControlEventTouchUpInside
 @property (nonatomic, copy) HWControlEventsActionBlock clickHandler;
 
-- (void)setEventsHandler:(HWControlEventsActionBlock _Nonnull)eventsHandler forControlEvents:(UIControlEvents)controlEvents;
+- (void)setHandler:(HWControlEventsActionBlock _Nonnull)eventsHandler forControlEvents:(UIControlEvents)controlEvents;
 - (HWControlEventsActionBlock)handlerForControlEvent:(UIControlEvents)controlEvent;
 
 @end
