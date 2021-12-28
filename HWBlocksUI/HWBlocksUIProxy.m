@@ -28,14 +28,96 @@
 
 #pragma mark - UIButton
 
-- (void)hanldeButtonEvents:(id)sender {
+- (void)handleTouchDown:(id)sender {
     if ([sender isKindOfClass:[UIButton class]]) {
         UIButton *button = (UIButton *)sender;
-        if (button.clickHandler) {
-            button.clickHandler();
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDown];
+        if (block) {
+            block();
         }
     }
 }
+
+- (void)handleTouchDownRepeat:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDownRepeat];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchDragInside:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDragInside];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchDragOutside:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDragOutside];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchDragEnter:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDragEnter];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchDragExit:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchDragExit];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchUpInside:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchUpInside];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchUpOutside:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchUpOutside];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleTouchCancel:(id)sender {
+    if ([sender isKindOfClass:[UIButton class]]) {
+        UIButton *button = (UIButton *)sender;
+        HWControlEventsActionBlock block = [button handlerForControlEvent:UIControlEventTouchCancel];
+        if (block) {
+            block();
+        }
+    }
+}
+
 
 #pragma mark - UITableView
 

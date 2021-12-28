@@ -9,14 +9,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-typedef void(^HWClickActionBlock)(void);
+typedef void(^HWControlEventsActionBlock)(void);
 
 @interface UIButton (HWBlocksUI)
 
 //simple method for UIControlEventTouchUpInside
-@property (nonatomic, copy) HWClickActionBlock clickHandler;
+@property (nonatomic, copy) HWControlEventsActionBlock clickHandler;
 
-- (void)setEventsHandler:(HWClickActionBlock _Nonnull)clickHandler forControlEvents:(UIControlEvents)controlEvents;
+- (void)setEventsHandler:(HWControlEventsActionBlock _Nonnull)eventsHandler forControlEvents:(UIControlEvents)controlEvents;
+- (HWControlEventsActionBlock)handlerForControlEvent:(UIControlEvents)controlEvent;
 
 @end
 
