@@ -74,7 +74,7 @@ A set of utilities to make UIKit Easier to write
     };
 ```
 
-`UIButton`，考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setEventsHandler:forControlEvents:`：
+`UIButton`，考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setHandler:forControlEvents:`：
 ```swift
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setFrame:CGRectMake(24, 200, self.view.frame.size.width - 48, 20)];
