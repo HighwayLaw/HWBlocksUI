@@ -24,8 +24,8 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
 
 - (void)setHandler:(HWControlEventsActionBlock)eventsHandler forControlEvents:(UIControlEvents)controlEvents {
     NSAssert(eventsHandler, @"eventsHandler cannot be nil");
-
-    static NSArray *allEvents = @[
+    
+    NSArray *allEvents = @[
         @(UIControlEventTouchDown),
         @(UIControlEventTouchDownRepeat),
         @(UIControlEventTouchDragInside),

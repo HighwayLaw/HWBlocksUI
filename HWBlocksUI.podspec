@@ -18,9 +18,9 @@ Pod::Spec.new do |spec|
   spec.author             = { "HighwayLaw" => "495255019@qq.com" }
 
   spec.platform     = :ios
-  spec.platform     = :ios, "8.0"
+  spec.platform     = :ios, "9.0"
 
-  spec.source       = { :git => "https://github.com/HighwayLaw/HWBlocksUI.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "git@github.com:HighwayLaw/HWBlocksUI.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "HWBlocksUI", "HWBlocksUI/**/*.{h,m}"
 
