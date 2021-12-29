@@ -120,26 +120,6 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
             [self addTarget:target action:@selector(handleEditingDidEndOnExit:) forControlEvents:UIControlEventEditingDidEndOnExit];
             break;
         }
-        case UIControlEventAllTouchEvents: {
-            [self addTarget:target action:@selector(handleAllTouchEvents:) forControlEvents:UIControlEventAllTouchEvents];
-            break;
-        }
-        case UIControlEventAllEditingEvents: {
-            [self addTarget:target action:@selector(handleAllEditingEvents:) forControlEvents:UIControlEventAllEditingEvents];
-            break;
-        }
-        case UIControlEventApplicationReserved: {
-            [self addTarget:target action:@selector(handleApplicationReserved:) forControlEvents:UIControlEventApplicationReserved];
-            break;
-        }
-        case UIControlEventSystemReserved: {
-            [self addTarget:target action:@selector(handleSystemReserved:) forControlEvents:UIControlEventSystemReserved];
-            break;
-        }
-        case UIControlEventAllEvents: {
-            [self addTarget:target action:@selector(handleAllEvents:) forControlEvents:UIControlEventAllEvents];
-            break;
-        }
         default:
             break;
     }

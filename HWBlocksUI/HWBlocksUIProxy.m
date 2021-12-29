@@ -168,55 +168,6 @@
     }
 }
 
-- (void)handleAllTouchEvents:(id)sender {
-    if ([sender isKindOfClass:[UIControl class]]) {
-        UIControl *control = (UIControl *)sender;
-        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllTouchEvents];
-        if (block) {
-            block();
-        }
-    }
-}
-
-- (void)handleAllEditingEvents:(id)sender {
-    if ([sender isKindOfClass:[UIControl class]]) {
-        UIControl *control = (UIControl *)sender;
-        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllEditingEvents];
-        if (block) {
-            block();
-        }
-    }
-}
-
-- (void)handleApplicationReserved:(id)sender {
-    if ([sender isKindOfClass:[UIControl class]]) {
-        UIControl *control = (UIControl *)sender;
-        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventApplicationReserved];
-        if (block) {
-            block();
-        }
-    }
-}
-
-- (void)handleSystemReserved:(id)sender {
-    if ([sender isKindOfClass:[UIControl class]]) {
-        UIControl *control = (UIControl *)sender;
-        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventSystemReserved];
-        if (block) {
-            block();
-        }
-    }
-}
-
-- (void)handleAllEvents:(id)sender {
-    if ([sender isKindOfClass:[UIControl class]]) {
-        UIControl *control = (UIControl *)sender;
-        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllEvents];
-        if (block) {
-            block();
-        }
-    }
-}
 
 #pragma mark - UITableView
 
