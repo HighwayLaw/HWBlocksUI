@@ -8,7 +8,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '9.0'
 
 target 'TestApp' do
-  pod 'HWBlocksUI', '~>0.0.3'
+  pod 'HWBlocksUI', '~>0.0.2'
 end
 
 ```
