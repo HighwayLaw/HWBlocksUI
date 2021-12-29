@@ -118,6 +118,105 @@
     }
 }
 
+- (void)handleValueChanged:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventValueChanged];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleEditingDidBegin:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventEditingDidBegin];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleEditingChanged:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventEditingChanged];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleEditingDidEnd:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventEditingDidEnd];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleEditingDidEndOnExit:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventEditingDidEndOnExit];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleAllTouchEvents:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllTouchEvents];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleAllEditingEvents:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllEditingEvents];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleApplicationReserved:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventApplicationReserved];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleSystemReserved:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventSystemReserved];
+        if (block) {
+            block();
+        }
+    }
+}
+
+- (void)handleAllEvents:(id)sender {
+    if ([sender isKindOfClass:[UIControl class]]) {
+        UIControl *control = (UIControl *)sender;
+        HWControlEventsActionBlock block = [control handlerForControlEvent:UIControlEventAllEvents];
+        if (block) {
+            block();
+        }
+    }
+}
 
 #pragma mark - UITableView
 

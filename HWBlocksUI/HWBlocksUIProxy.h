@@ -23,6 +23,18 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)handleTouchUpOutside:(id)sender;
 - (void)handleTouchCancel:(id)sender;
 
+- (void)handleValueChanged:(id)sender;
+
+- (void)handleEditingDidBegin:(id)sender;
+- (void)handleEditingChanged:(id)sender;
+- (void)handleEditingDidEnd:(id)sender;
+- (void)handleEditingDidEndOnExit:(id)sender;
+- (void)handleAllTouchEvents:(id)sender;
+- (void)handleAllEditingEvents:(id)sender;
+- (void)handleApplicationReserved:(id)sender;
+- (void)handleSystemReserved:(id)sender;
+- (void)handleAllEvents:(id)sender;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -35,6 +35,16 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
         @(UIControlEventTouchUpInside),
         @(UIControlEventTouchUpOutside),
         @(UIControlEventTouchCancel),
+        @(UIControlEventValueChanged),
+        @(UIControlEventEditingDidBegin),
+        @(UIControlEventEditingChanged),
+        @(UIControlEventEditingDidEnd),
+        @(UIControlEventEditingDidEndOnExit),
+        @(UIControlEventAllTouchEvents),
+        @(UIControlEventAllEditingEvents),
+        @(UIControlEventApplicationReserved),
+        @(UIControlEventSystemReserved),
+        @(UIControlEventAllEvents),
     ];
     
     for (NSNumber *event in allEvents) {
@@ -88,6 +98,46 @@ static void *HWBlocksUIHandlersDicKey = &HWBlocksUIHandlersDicKey;
         }
         case UIControlEventTouchCancel: {
             [self addTarget:target action:@selector(handleTouchCancel:) forControlEvents:UIControlEventTouchCancel];
+            break;
+        }
+        case UIControlEventValueChanged: {
+            [self addTarget:target action:@selector(handleValueChanged:) forControlEvents:UIControlEventValueChanged];
+            break;
+        }
+        case UIControlEventEditingDidBegin: {
+            [self addTarget:target action:@selector(handleEditingDidBegin:) forControlEvents:UIControlEventEditingDidBegin];
+            break;
+        }
+        case UIControlEventEditingChanged: {
+            [self addTarget:target action:@selector(handleEditingChanged:) forControlEvents:UIControlEventEditingChanged];
+            break;
+        }
+        case UIControlEventEditingDidEnd: {
+            [self addTarget:target action:@selector(handleEditingDidEnd:) forControlEvents:UIControlEventEditingDidEnd];
+            break;
+        }
+        case UIControlEventEditingDidEndOnExit: {
+            [self addTarget:target action:@selector(handleEditingDidEndOnExit:) forControlEvents:UIControlEventEditingDidEndOnExit];
+            break;
+        }
+        case UIControlEventAllTouchEvents: {
+            [self addTarget:target action:@selector(handleAllTouchEvents:) forControlEvents:UIControlEventAllTouchEvents];
+            break;
+        }
+        case UIControlEventAllEditingEvents: {
+            [self addTarget:target action:@selector(handleAllEditingEvents:) forControlEvents:UIControlEventAllEditingEvents];
+            break;
+        }
+        case UIControlEventApplicationReserved: {
+            [self addTarget:target action:@selector(handleApplicationReserved:) forControlEvents:UIControlEventApplicationReserved];
+            break;
+        }
+        case UIControlEventSystemReserved: {
+            [self addTarget:target action:@selector(handleSystemReserved:) forControlEvents:UIControlEventSystemReserved];
+            break;
+        }
+        case UIControlEventAllEvents: {
+            [self addTarget:target action:@selector(handleAllEvents:) forControlEvents:UIControlEventAllEvents];
             break;
         }
         default:
