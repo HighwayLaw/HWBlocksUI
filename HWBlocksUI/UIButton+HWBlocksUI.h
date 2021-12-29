@@ -6,6 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UIControl+HWBlocksUI.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -15,9 +16,6 @@ typedef void(^HWControlEventsActionBlock)(void);
 
 //simple method for UIControlEventTouchUpInside
 @property (nonatomic, copy) HWControlEventsActionBlock clickHandler;
-
-- (void)setHandler:(HWControlEventsActionBlock _Nonnull)eventsHandler forControlEvents:(UIControlEvents)controlEvents;
-- (HWControlEventsActionBlock)handlerForControlEvent:(UIControlEvents)controlEvent;
 
 @end
 
