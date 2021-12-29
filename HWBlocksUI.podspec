@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
 
   spec.name         = "HWBlocksUI"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "optimize UIKit such as UITableview, UIButton, UITextField, UISwitch with Blocks to make it easier to write"
 
   spec.description  = <<-DESC
