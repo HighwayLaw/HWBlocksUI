@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios
   spec.platform     = :ios, "9.0"
 
-  spec.source       = { :git => "git@github.com:HighwayLaw/HWBlocksUI.git", :tag => "#{spec.version}" }
+  spec.source       = { :git => "https://github.com/HighwayLaw/HWBlocksUI.git", :tag => "#{spec.version}" }
 
   spec.source_files  = "HWBlocksUI", "HWBlocksUI/**/*.{h,m}"
 
