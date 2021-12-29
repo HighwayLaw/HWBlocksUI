@@ -1,6 +1,9 @@
 # HWBlocksUI
 A set of utilities to make UIKit Easier to write
 
+# 使用
+pod 'HWBlocksUI'
+
 # 背景
 `UIKit`中的许多常用控件通过`Delegate`方式或者指定`target+selector`来实现事件回调，例如`UITableView`，`UITextField`，`UIButton`等。这种方式的优点是代码规整，在代码量大的时候更容易维护。但是当回调逻辑不是特别复杂时，使用`Block`回调会比`Delegate`或`target+selector`更加有优势，具体体现在：
 - **代码紧凑，无需声明协议，可以将相关代码逻辑集中在一起，降低开发调试成本；**
