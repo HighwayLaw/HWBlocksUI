@@ -21,7 +21,8 @@ end
 
 # 使用
 
-**`UITableView`** 实现一个简单列表:
+## **`UITableView`** 
+实现一个简单列表：
 ```swift
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
     [tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:reuseId];
@@ -45,7 +46,8 @@ end
     };
 ```
 
-**`UITextField`** 实现一个最多允许输入6个字符的输入框：
+## **`UITextField`** 
+实现一个最多允许输入6个字符的输入框：
 ```swift
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 30)];
     textField.borderStyle = UITextBorderStyleRoundedRect;
@@ -66,7 +68,8 @@ end
     };
 ```
 
-**`UIButton`**，考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setHandler:forControlEvents:`：
+## **`UIButton`**
+考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setHandler:forControlEvents:`：
 ```swift
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setFrame:CGRectMake(24, 200, self.view.frame.size.width - 48, 20)];
@@ -80,7 +83,8 @@ end
             NSLog(@"touch down");
     } forControlEvents:UIControlEventTouchDown];
 ```
-**`UISwitch`**，所有继承于`UIControl`的类均可支持：
+## **`UISwitch`**
+所有继承于`UIControl`的类均可支持：
 ```swift
     UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 100, 100, 20)];
     aSwitch.on = YES;
