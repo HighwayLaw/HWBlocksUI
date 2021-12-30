@@ -26,11 +26,23 @@ end
 ```swift
 + (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
 ```
-又例如`iOS 9`之前常用的`UIAlertViewController`，要通过`UIAlertViewDelegate`实现点击回调，苹果干脆废弃重写了一个类`UIAlertController`，抽出`UIAlertAction`类，完全通过`Block`方式实现，代码写起来简洁明了很多：
+又例如`iOS 9`之前常用的`UIAlertViewController`，要通过`UIAlertViewDelegate`实现点击回调，苹果干脆废弃重写了一个类`UIAlertController`，抽出`UIAlertAction`类，完全通过`Block`方式实现，代码写起来简洁明了很多，首先定义一个包含事件处理`Block`的`UIAlertAction`，再添加到`UIAlert`中：
 ```swift
+///定义一个包含事件处理Block的UIAlertAction
 + (instancetype)actionWithTitle:(nullable NSString *)title style:(UIAlertActionStyle)style handler:(void (^ __nullable)(UIAlertAction *action))handler;
-```
 
+///把action添加到UIAlertController
+- (void)addAction:(UIAlertAction *)action;
+```
+`UIControl`也有同样的处理方式，封装了`Block`方式的事件处理回调，可惜只能在`iOS 14`后使用：
+
+```swift
+///定义一个包含事件处理Block的UIAction
++ (instancetype)actionWithHandler:(UIActionHandler)handler;
+
+///使用UIAction代替之前的target+selector方式处理回调
+- (void)addAction:(UIAction *)action forControlEvents:(UIControlEvents)controlEvents;
+```
 # 优化思路
 鉴于上述分析，对`UITableView`，`UITextField`，`UIButton`等常用的`UIKit`类进行`Block`改写，同时希望做到以下几点：
 - **在`Delegate`的基础上增加对应的`Block`方式，原有`Delegate`方式不受影响，调用方可根据实际场景自行选择合适的回调方式；**
@@ -39,7 +51,7 @@ end
 - **尽量不使用`method swizzling`等黑魔法，对安全性与稳定性的影响降到最小。**
 
 # HWBlocksUI
-基于上述目的，笔者封装了[HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)库，对`UITableView`，`UITextField`，`UIButton`常用UI组件做了Block改造，使用示例如下：
+基于上述目的，笔者封装了[HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)，对`UITableView`，`UITextField`，`UIControl`所有子类如`UIButton`，`UISwitch`等常用UI组件做了Block改造，使用示例如下：
 
 `UITableView`实现一个简单列表:
 ```swift
@@ -91,14 +103,28 @@ end
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
     [btn setFrame:CGRectMake(24, 200, self.view.frame.size.width - 48, 20)];
     [btn setTitle:@"OK" forState:UIControlStateNormal];
+    [self.view addSubview:btn];
+    
     btn.clickHandler = ^{
         NSLog(@"OK");
     };
-    [self.view addSubview:btn];
+    [btn setHandler:^{
+            NSLog(@"touch down");
+    } forControlEvents:UIControlEventTouchDown];
+```
+`UISwitch`，所有继承于`UIControl`的类均可支持：
+```swift
+    UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 100, 100, 20)];
+    aSwitch.on = YES;
+    [self.view addSubview:aSwitch];
+    
+    [aSwitch setHandler:^{
+        NSLog(@"switch value changed");
+    } forControlEvents:UIControlEventValueChanged];
 ```
 # 实现原理
 
-对`UIKit`进行`Block`改造的核心点在于：
+[HWBlocksUI](https://github.com/HighwayLaw/HWBlocksUI)对`UIKit`进行`Block`改造的核心点在于：
 - 为要改造的`UIKit`类，添加每个Delegate方法对应的`Block`属性；
 - 由于无法改造`UIKit`源码，所以仍然需要有一个`Delegate`对象，实现对应的代理方法；
 - `Delegate`对象在执行代理方法时，找到对应的`Block`执行实际回调方法；
