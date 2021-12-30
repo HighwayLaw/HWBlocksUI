@@ -21,7 +21,7 @@ end
 
 # 使用
 
-## `UITableView`
+## UITableView
 实现一个简单列表：
 ```swift
     UITableView *tableView = [[UITableView alloc] initWithFrame:self.view.bounds];
@@ -46,7 +46,7 @@ end
     };
 ```
 
-## `UITextField`
+## UITextField
 实现一个最多允许输入6个字符的输入框：
 ```swift
     UITextField *textField = [[UITextField alloc] initWithFrame:CGRectMake(20, 100, self.view.frame.size.width - 40, 30)];
@@ -68,7 +68,7 @@ end
     };
 ```
 
-## `UIButton`
+## UIButton
 考虑到对`UIControlEventsTouchUpInside`事件响应最多，所以专门封了一个`clickHandler`，对其他事件响应可以使用`setHandler:forControlEvents:`：
 ```swift
     UIButton *btn = [UIButton buttonWithType:UIButtonTypeSystem];
@@ -83,7 +83,7 @@ end
             NSLog(@"touch down");
     } forControlEvents:UIControlEventTouchDown];
 ```
-## `UISwitch`
+## UISwitch
 所有继承于`UIControl`的类均可支持：
 ```swift
     UISwitch *aSwitch = [[UISwitch alloc] initWithFrame:CGRectMake(0, 100, 100, 20)];
